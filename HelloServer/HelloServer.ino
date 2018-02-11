@@ -3,7 +3,7 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 
-#include "network.h"
+#include "networkDetails.h"
 
 ESP8266WebServer server(80);
 
