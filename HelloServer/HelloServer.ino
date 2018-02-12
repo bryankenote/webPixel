@@ -3,6 +3,7 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 
+#include "FS.h"
 #include "networkDetails.h"
 
 ESP8266WebServer server(80);
@@ -11,7 +12,15 @@ const int led = 13;
 
 void handleRoot() {
   digitalWrite(led, 1);
-  server.send(200, "text/plain", "hello from esp8266!");
+  SPIFFS.begin();
+  File f = SPIFFS.open("/c.html", "r");
+  if (!f) {
+    server.send(500, "unable to load page");
+    f.close();
+  } else {
+    server.send(200, "text/html", f.readString());
+  }
+  SPIFFS.end();
   digitalWrite(led, 0);
 }
 

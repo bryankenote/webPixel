@@ -91,6 +91,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
+const board = '10.0.0.194';
 const sliders = $('.slider');
 
 for (let slider of sliders) {
@@ -117,7 +118,7 @@ $('#submit').on('click', function () {
     console.log(data);
     /*
     $.ajax({
-        url: '#',
+        url: board + '/inline',
         type: 'post',
         data: { rgd: data },
         success: function (data) {
