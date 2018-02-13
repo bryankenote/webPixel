@@ -91,7 +91,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
-const board = '10.0.0.194';
 const sliders = $('.slider');
 
 for (let slider of sliders) {
@@ -107,28 +106,21 @@ for (let slider of sliders) {
 }
 $('#submit').on('click', function () {
     const values = $('.value');
-    let data = [];
+    let args = '';
     for(let value of values) {
         const child = value.childNodes[1];
-        data.push({
-            color: child.id.split('-')[0],
-            value: child.innerHTML
-        });
+        args += child.id.split('-')[0] + '=' + child.innerHTML + '&';
     }
-    console.log(data);
-    /*
     $.ajax({
-        url: board + '/inline',
+        url: '/set?' + args,
         type: 'post',
-        data: { rgd: data },
-        success: function (data) {
-            console.log(data);
+        success: function (res) {
+            console.log(res);
         },
         error: function (error) {
             console.log(error);
         }
     });
-    */
 });
 </script>
 
